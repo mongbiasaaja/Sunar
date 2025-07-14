@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunar Almanar - Jual Beli Mobil Premium</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Variabel Warna */
+        :root {
+            --primary: #000000;
+            --secondary: #ffffff;
+            --accent: #e0e0e0;
+            --text-dark: #333333;
+            --text-light: #f5f5f5;
+        }
+
+        /* Global Styles */
+        body {
+            background-color: var(--secondary);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: #555;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: var(--secondary);
+            border: 2px solid var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--primary);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary);
+            color: var(--secondary);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--secondary);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .logo h1 span {
+            color: var(--text-dark);
+            font-weight: 300;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), 
+                        url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/30c7c6b9-8582-4b54-9f8c-f9680244e5d8.png') no-repeat center center/cover;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        /* Search Section */
+        .search-section {
+            background-color: var(--primary);
+            color: var(--secondary);
+            padding: 40px 0;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .search-box select, 
+        .search-box input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background-color: var(--secondary);
+            color: var(--text-dark);
+        }
+
+        .search-btn {
+            display: flex;
+            align-items: flex-end;
+        }
+
+        /* Featured Cars */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .car-card {
+            background-color: var(--secondary);
+            border: 1px solid var(--accent);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .car-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .car-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .car-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .car-card:hover .car-img img {
+            transform: scale(1.1);
+        }
+
+        .car-details {
+            padding: 20px;
+        }
+
+        .car-details h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .car-specs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .car-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .car-price h4 {
+            margin: 0;
+            font-size: 1.4rem;
+            color: var(--primary);
+        }
+
+        /* About Section */
+        .about-section {
+            background-color: var(--accent);
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-img {
+            height: 100%;
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--secondary);
+            border: 1px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        /* Testimonials */
+        .testimonial-section {
+            background-color: var(--accent);
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background-color: var(--secondary);
+            padding: 30px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .testimonial-content {
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .author-info p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--secondary);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            color: var(--secondary);
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary);
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        /* Mobile Responsive */
+        @media screen and (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--secondary);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 50px;
+                transition: all 0.5s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+
+            .about-img {
+                height: 300px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="fade-in">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <h1>SUNAR <span>ALMANAR</span></h1>
+                </div>
+                
+                <ul class="nav-links">
+                    <li><a href="#home">Beranda</a></li>
+                    <li><a href="#cars">Mobil</a></li>
+                    <li><a href="#about">Tentang Kami</a></li>
+                    <li><a href="#services">Layanan</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+                
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Temukan Mobil Impian Anda</h1>
+                <p>Kami menyediakan berbagai pilihan mobil berkualitas dengan harga terbaik. Percayakan kebutuhan mobil Anda kepada kami.</p>
+                <a href="#cars" class="btn">Jelajahi Sekarang</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <div class="search-box">
+                    <select>
+                        <option value="">Semua Merek</option>
+                        <option value="toyota">Toyota</option>
+                        <option value="honda">Honda</option>
+                        <option value="suzuki">Suzuki</option>
+                        <option value="daihatsu">Daihatsu</option>
+                        <option value="mitsubishi">Mitsubishi</option>
+                    </select>
+                </div>
+                <div class="search-box">
+                    <select>
+                        <option value="">Semua Model</option>
+                        <option value="sedan">Sedan</option>
+                        <option value="suv">SUV</option>
+                        <option value="mpv">MPV</option>
+                        <option value="hatchback">Hatchback</option>
+                        <option value="pickup">Pickup</option>
+                    </select>
+                </div>
+                <div class="search-box">
+                    <select>
+                        <option value="">Semua Tahun</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2015-2020</option>
+                        <option value="2014">2010-2014</option>
+                    </select>
+                </div>
+                <div class="search-box">
+                    <input type="text" placeholder="Harga Maksimal...">
+                </div>
+                <div class="search-box search-btn">
+                    <button class="btn btn-secondary">Cari Mobil</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Cars -->
+    <section id="cars" class="featured-cars">
+        <div class="container">
+            <div class="section-title">
+                <h2>Mobil Unggulan</h2>
+                <p>Pilihan terbaik kami untuk Anda</p>
+            </div>
+            
+            <div class="cars-grid">
+                <!-- Car 1 -->
+                <div class="car-card">
+                    <div class="car-img">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/26a67733-4b19-4134-afdb-aca36cb7a8dd.png" alt="Toyota Fortuner 2023 hitam metallic premium dengan velg alloy">
+                    </div>
+                    <div class="car-details">
+                        <h3>Toyota Fortuner 2023</h3>
+                        <div class="car-specs">
+                            <span><i class="fas fa-gas-pump"></i> Bensin</span>
+                            <span><i class="fas fa-tachometer-alt"></i> 10.000 km</span>
+                            <span><i class="fas fa-car"></i> SUV</span>
+                        </div>
+                        <div class="car-price">
+                            <h4>Rp 650.000.000</h4>
+                            <a href="#" class="btn btn-secondary">Detail</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Car 2 -->
+                <div class="car-card">
+                    <div class="car-img">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a4ae0e8c-aa11-4067-8451-6ff870c1a2a4.png" alt="Honda Civic Type R putih sporty dengan spoiler besar">
+                    </div>
+                    <div class="car-details">
+                        <h3>Honda Civic Type R</h3>
+                        <div class="car-specs">
+                            <span><i class="fas fa-gas-pump"></i> Bensin</span>
+                            <span><i class="fas fa-tachometer-alt"></i> 15.000 km</span>
+                            <span><i class="fas fa-car"></i> Sedan</span>
+                        </div>
+                        <div class="car-price">
+                            <h4>Rp 950.000.000</h4>
+                            <a href="#" class="btn btn-secondary">Detail</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Car 3 -->
+                <div class="car-card">
+                    <div class="car-img">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/014cd523-632a-45e9-af15-cf467905ae26.png" alt="Suzuki Ertiga Hybrid hitam premium dengan interior mewah">
+                    </div>
+                    <div class="car-details">
+                        <h3>Suzuki Ertiga Hybrid</h3>
+                        <div class="car-specs">
+                            <span><i class="fas fa-plug"></i> Hybrid</span>
+                            <span><i class="fas fa-tachometer-alt"></i> 5.000 km</span>
+                            <span><i class="fas fa-car"></i> MPV</span>
+                        </div>
+                        <div class="car-price">
+                            <h4>Rp 280.000.000</h4>
+                            <a href="#" class="btn btn-secondary">Detail</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="#" class="btn">Lihat Semua Mobil</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-container">
+                <div class="about-content">
+                    <h2>Tentang Sunar Almanar</h2>
+                    <p>Sunar Almanar adalah perusahaan jual beli mobil terpercaya yang berkomitmen untuk memberikan pelayanan terbaik kepada pelanggan. Dengan pengalaman lebih dari 10 tahun di industri otomotif, kami memahami kebutuhan Anda.</p>
+                    <p>Kami menyediakan berbagai pilihan mobil berkualitas dengan harga kompetitif dan proses transaksi yang mudah dan transparan.</p>
+                    <a href="#" class="btn">Pelajari Lebih Lanjut</a>
+                </div>
+                <div class="about-img">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/939ef1d1-44f9-4798-996c-93df54ce0e52.png" alt="Showroom mobil modern Sunar Almanar dengan penerangan profesional">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Layanan Kami</h2>
+                <p>Yang bisa kami berikan untuk Anda</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-search-dollar"></i>
+                    </div>
+                    <h3>Inspeksi Gratis</h3>
+                    <p>Kami menyediakan inspeksi mobil gratis untuk memastikan kondisi mobil yang akan Anda beli.</p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>Pembayaran Mudah</h3>
+                    <p>Berbagai metode pembayaran tersedia termasuk cicilan dengan bunga rendah dari bank partner.</p>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-car-alt"></i>
+                    </div>
+                    <h3>Test Drive</h3>
+                    <p>Anda dapat melakukan test drive untuk merasakan langsung performa mobil sebelum membeli.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonial-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Testimoni Pelanggan</h2>
+                <p>Apa kata mereka tentang kami</p>
+            </div>
+            
+            <div class="testimonials">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Proses jual mobil saya sangat cepat dan harga yang diberikan sesuai dengan ekspektasi. Sangat puas dengan pelayanan Sunar Almanar."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7b23d49d-909e-42fb-98b5-c5330bccf5b2.png" alt="Foto profesional Budi Santoso">
+                        </div>
+                        <div class="author-info">
+                            <h4>Budi Santoso</h4>
+                            <p>Pengusaha</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Mobil yang saya beli kondisi benar-benar seperti baru. Transparan dalam penjelasan kondisi mobil dan pelayanan after sales-nya sangat baik."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7eaafd3a-f319-4c18-88be-7a5482801e60.png" alt="Foto profesional Dewi Anggraeni">
+                        </div>
+                        <div class="author-info">
+                            <h4>Dewi Anggraeni</h4>
+                            <p>Dokter</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Proses pencairan dana sangat cepat setelah mobil laku. Tidak ada biaya tersembunyi dan semuanya transparan. Sangat recommended!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/50c0b455-d6d4-42d2-b12a-4062bb5cf126.png" alt="Foto profesional Andika Pratama">
+                        </div>
+                        <div class="author-info">
+                            <h4>Andika Pratama</h4>
+                            <p>Karyawan Bank</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Sunar Almanar</h3>
+                    <p>Perusahaan jual beli mobil terpercaya dengan layanan profesional dan harga kompetitif.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/sunaralmanar" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/sunaralmanar" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/sunaralmanar" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.tiktok.com/@sunaralmanar" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.youtube.com/sunaralmanar" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Link Cepat</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Beranda</a></li>
+                        <li><a href="#cars">Mobil</a></li>
+                        <li><a href="#about">Tentang Kami</a></li>
+                        <li><a href="#services">Layanan</a></li>
+                        <li><a href="#contact">Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Kontak Kami</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Jl. Kalitidu, Bojonegoro, Jawa Timur</li>
+                        <li><i class="fas fa-phone"></i> (021) 1234-5678</li>
+                        <li><i class="fas fa-envelope"></i> info@sunaralmanar.com</li>
+                        <li><i class="fas fa-clock"></i> Buka setiap hari: 09.00 - 17.00</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Sunar Almanar. Semua Hak Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Font Awesome for Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <!-- JavaScript for Mobile Navigation -->
+    <script>
+        // Mobile Navigation
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+        
+        // Animation on Scroll
+        window.addEventListener('scroll', reveal);
+        
+        function reveal() {
+            const reveals = document.querySelectorAll('.fade-in');
+            
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const revealTop = reveals[i].getBoundingClientRect().top;
+                const revealPoint = 150;
+                
+                if (revealTop < windowHeight - revealPoint) {
+                    reveals[i].classList.add('active');
+                } else {
+                    reveals[i].classList.remove('active');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
